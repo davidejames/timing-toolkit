@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "timing-toolkit"
+dynamic = ["version"]
+description = 'Tools for measuring and controlling execution time.'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "David E. James", email = "david.eugene.james@protonmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/davidejames/timing-toolkit#readme"
+Issues = "https://github.com/davidejames/timing-toolkit/issues"
+Source = "https://github.com/davidejames/timing-toolkit"
+
+[tool.hatch.version]
+path = "src/timing_toolkit/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/timing_toolkit tests}"
+
+[tool.coverage.run]
+source_pkgs = ["timing_toolkit", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/timing_toolkit/__about__.py",
+]
+
+[tool.coverage.paths]
+timing_toolkit = ["src/timing_toolkit", "*/timing-toolkit/src/timing_toolkit"]
+tests = ["tests", "*/timing-toolkit/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
